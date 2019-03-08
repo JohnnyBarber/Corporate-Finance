@@ -1,0 +1,182 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>hw3-annretset-Shuyu_Dong-answer</title>
+</head>
+
+<meta name="KEYWORDS" content="..." />
+<meta name="Author" content="Shuyu Dong"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="hw.css" />
+
+<body>
+<h1> Homework3-Annretset, by Shuyu Dong </h1>
+ <h2> Executive Summary </h2>
+ 
+<p>By analyzing the annual stock return dataset, we conclude that the stock market has an average return of 9.04% and standard deviation of 47.21%. We can also conclude that the stock market has positive skewness and big kurtosis which means it has fat tails.</p>
+
+<h2> Explanation </h2>
+<p>Firstly, we get all stock monthly returns with dividend, price and shares outstanding from 2010-01-01 to 2018-12-30 (source: CRSP). Then we calculate the market cap by price*shares_outstanding. And we calculated the yearly stock return by compounding the monthly return and combine it with perm, ticker, cusip, year and marketcap in the dataset. The stats we get for stock return are quite ridiculous.</p>
+<p>As we can see, the stats are highly influeced by the extreme values, like a stock which has 400% return in January and disappears ever since. By getting rid of these extreme values, we take 0.5%-99.5% quantile of the data and compute the stats again. We can see that this is more resonable.</p>
+<p>The stats and histgram are shown as below.</p>
+
+ <h2> Tables and Figures </h2>
+ <table style="font-size:80%">
+        <caption> Stats for Stock Annual Return </caption>
+        <thead> <tr> <th>Stats</th> <th>Original Data</th> <th> 99% data</th> </tr> </thead>
+        <tbody>
+          <tr> <td>Mean</td> <td>3709.998</td> <td> 0.09035869</td> </tr>
+          <tr> <td>Standard Deviation</td> <td> 947652.9 </td> <td>0.4721217 </td> </tr>
+          <tr> <td>Skewness</td> <td>  257.6033 </td> <td> 2.070369 </td> </tr>
+          <tr> <td>Kurtosis</td> <td> 66364.92</td> <td> 13.42732 </td> </tr>
+        </tbody>
+      </table>
+<img alt="Rplot01" src="data:image/png;base64,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">
+
+
+ <h2> Computer Code </h2>
+ <pre>
+library(lubridate)
+library(xts)
+library(readxl)
+library(moments)
+
+raw_data=read_excel("stocks.xlsx")
+raw_data$market_cap=abs(raw_data$`Price or Bid/Ask Average`)*raw_data$`Shares Outstanding`/1000
+raw_data$date=ymd(raw_data$`Names Date`)
+raw_data$Returns=as.numeric(raw_data$Returns)
+raw_data=raw_data[complete.cases(raw_data),]
+N=length(raw_data$PERMNO)
+yr=vector()
+cusip = vector()
+MC = vector()
+date=vector()
+permno=vector()
+
+
+
+mc=raw_data$market_cap[1]
+X=1+raw_data$Returns[1]
+count=1
+for(i in 2:N){
+  if(raw_data$PERMNO[i]==raw_data$PERMNO[i-1] && 
+     year(raw_data$date[i])==year(raw_data$date[i-1])){
+    
+    X=X*(1+raw_data$Returns[i])
+    mc=mc+raw_data$market_cap[i]
+    count=count+1
+  }else{
+    Y=X^(12/count)-1
+    yr=append(yr,Y)
+    permno=append(permno,raw_data$PERMNO[i-1])
+    MC=append(MC,(mc/count))
+    date=append(date,year(raw_data$date[i-1]))
+    cusip=append(cusip,raw_data$`CUSIP Header`[i-1])
+
+    X=1+raw_data$Returns[i]
+    count=1
+    mc=raw_data$market_cap[i]
+  }
+}
+
+result=data.frame(permno,cusip,date,MC,yr)
+
+summary(result$yr)
+mean(result$yr)
+sqrt(var(result$yr))
+skewness(result$yr)
+kurtosis(result$yr)
+summary(result$MC)
+result[which.max(result$MC),]
+
+write.csv(result,file="annretset.csv")
+
+quantile(result$yr,c(0.005,0.995))
+
+return=result[-which(result$yr>4.0317063  ),]
+return=return[-which(return$yr<(-0.9404624)),]
+hist(return$yr,breaks = 80,main="99% quantile data")
+
+
+
+
+mean(return$yr)
+median(return$yr)
+sqrt(var(return$yr))
+skewness(return$yr)
+kurtosis(return$yr)
+
+</pre>
+
+<h2> References </h2>
+ <ul>
+      <li> <a href="https://wrds-web.wharton.upenn.edu/wrds/ds/crsp/stock_a/msf.cfm?navId=128">Monthly Stock Return</a>, WRDS, retrieved on Feb 1st, 2019. </li>
+    </ul>
+</body>
+</html>

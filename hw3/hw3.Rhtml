@@ -1,0 +1,210 @@
+<html>
+
+<head>
+<title>Title</title>
+<style>
+/* we start with iaw.css */
+
+
+h1 { font-size:17pt; text-align:center; color:black; }
+h2 { font-size:14pt; text-align:left; color:black; }
+h3 { font-size:11pt; text-align:left; color:black; }
+
+a { text-decoration:none; color:#3284bf; }
+a:hover { text-decoration:underline; }
+/* { background-color:#3284bf; color:white; } */
+
+hr.fat { background-color:black; height:4px; }
+
+hr { background-color:black; height:1px; }
+
+li { margin-top: 1em; }
+
+p.notice { background-color:white; font-size:10pt; border:solid black 5px; }
+
+caption { color:brown; text-decoration:underline; font-size:9pt; }
+td { padding-left:1em; padding-right:1em; }
+th { text-decoration:underline }
+table { margin-left:2em; }
+
+p.boxright { width:355px; margin-right:0px; background-color:white; font-size:10pt; float:right; padding:20px; font-size:large; vertical-align:top; }
+
+dt.big { line-height:3; font-size:large; font-weight:bolder; font-family:sans-serif;margin-top:12pt }
+dt.hili { font-size:large; font-family:Cursive; display:inline; text-decoration:underline; padding-top:1em; }
+dt.smallbold { font-size:small; font-family:Cursive; display:inline; font-weight:bold; }
+dd { margin-bottom:1ex }
+
+td.hili { font-size:x-large; font-family:cursive; margin:20px; vertical-align:top }
+
+div.smallnobox { width:400pt; font-size:smaller; margin:10px; }
+div.smallbox { width:400pt; font-size:smaller; margin:10px; border:solid black 1px; }
+
+.boxquote {float: left; text-align: center; border: solid black 1px;font-family: Times, sans-serif; font-size: 12pt; margin: 10px;}
+
+td.googler { vertical-align:bottom; color:green; font-size:x-large}
+
+.small { font-size:smaller; }
+.right { text-align:right; }
+
+body { font-family: 'Oxygen', Verdana, serif; margin:2em; background-color: #F0F0F0; }
+
+div.explain { font-size:smaller; margin-left:40px; margin-right:40px; margin-bottom:10px; }
+
+
+summary::-webkit-details-marker {
+    color: #00ACF3;
+    font-size: 125%;
+    margin-right: 2px;
+}
+
+summary:focus {	outline-style: none; }
+article { margin-left:1em; }
+article > details > summary { font-size: 28px; margin-top: 32px; }
+article > details > summary.link { font-size: 28px; margin-top: 32px; text-decoration:underine; }
+details > p { margin-left: 36px; background-color:#f0f0f0; }
+details > div { margin-left: 36px; background-color:#f0f0f0; }
+
+details details { margin-left: 48px; }
+details details summary { font-size: 16px; }
+
+</style>
+</head>
+
+
+  <body>
+
+    <h1> Homework 1, by Jiaqi Li, Fed 2, 2019 </h1>
+
+    <h2> Explanation </h2>
+In this assigment, data is imported from WRDS with monthly return of each company. Time period is from 2007 to 2018. The annual rate of returns are the geometric mean of monthly return in each year for each stock. If a company does not have data for one 12-month period, then we set that the other months have returns of 0%, which makes returns of months on the missing period equal to 1+0% = 1. Each company will have several annual rate of returns for each year except those did not survive for longer than 1 year. The table below demonstrates how the data looks like.
+</p>
+
+    <h2> Tables and Figures </h2>
+
+    <p> Here goes your table:
+      <br> <br />
+      <table style="font-size:80%">
+        <caption> Annualized Return Table </caption>
+        <thead> <tr> <th>Company</th> <th>Year</th> <th> MarketCap<br />(million)</th> <th>return</th> </tr> </thead>
+        <tbody>
+          <tr> <td>EWST</td> <td><b>2008</td> <td> <b>41.01386 </td> <td> <b>0.68311532 </td> </tr>
+          <tr> <td>EWST</td> <td> <b>2009 </td> <td> <b>39.9127 </td> <td> <b>-0.07820421 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2010 </td> <td> <b>37.60942 </td> <td> <b>0.32443534 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2011 </td> <td> <b>64.04755 </td> <td> <b>0.07399372 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2011 </td> <td> <b>90.30615 </td> <td> <b>0.13916314 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2012 </td> <td> <b>84.87552 </td> <td> <b>-0.13937970 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2013 </td> <td> <b>91.75922 </td> <td> <b>-0.09069384 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2014 </td> <td> <b>113.85761 </td> <td> <b>0.44274893 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2015 </td> <td> <b>98.82117 </td> <td> <b>-0.28216527 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2016 </td> <td> <b>91.95410 </td> <td> <b>0.74063661 </td> </tr>
+          <tr> <td>EGAS</td> <td> <b>2017 </td> <td> <b>133.86700 </td> <td> <b>0.07658853 </td> </tr>
+          <tr> <td>BTFG</td> <td> <b>2007 </td> <td> <b>219.45156 </td> <td> <b>-0.51088482 </td> </tr>
+          <tr> <td>BTFG</td> <td> <b>2008 </td> <td> <b>190.66335 </td> <td> <b>0.28261156 </td> </tr>
+        </tbody>
+      </table>
+
+    <h2> Statistical Summary </h2>
+    
+<img alt="data-distribution" src="data:image/png;base64,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">
+
+For annual rate of return:
+<br>
+Mean:     0.09698954 
+<br>
+Std;      0.628082
+<br>
+Skewness: 3.861888
+<br>
+Kurtosis: 32.35385
+<br>
+Max:      8.17573
+<br>
+Min:      -0.93857
+<br>
+Median:   0.03296
+<br>
+1st Qu:   -0.19642
+<br>
+3rd Qu:   0.25729
+<br>
+
+    <h2> Method </h2>
+    Each company is seperated and returns are computed each year for each company. Some company have very large return (increase from $0.25 to $1). These companies' returns are removed so that we can have a more informative summary about all the annual returns for all the companies (only for summary, not removed from the data file that will be used further in the future).
+</p>
+
+    <h2> Computer Code </h2>
+
+    <pre>
+library(readxl)
+library(lubridate)
+library(moments)
+data = read_excel("data_holding.xlsx")
+data = data[complete.cases(data),]
+data$MC = abs(data$`Price or Bid/Ask Average`)*data$`Shares Outstanding`
+test = data[order(data$PERMNO),]
+test$`Names Date` = as.Date(as.character(test$`Names Date`), format = "%Y%m%d")
+n = length(data$PERMNO)
+nS = length(unique(test$PERMNO))
+len = vector()
+sep = vector()
+name = vector()
+MC = vector()
+Year = vector()
+
+mc = test$MC[1]
+X = 1+test$Returns[1]
+count = 1
+for (i in 1:(n-1))
+{
+  if (test$PERMNO[i+1] == test$PERMNO[i] &&
+      year(test$`Names Date`[i+1]) == year(test$`Names Date`[i]))
+  {
+    X = X*(1+test$Returns[i+1])
+    count = count + 1
+    mc = mc + test$MC[i+1]
+  }
+  else
+  {
+    len = append(len,count)
+    Y = X^(12/count)-1
+    sep = append(sep,Y)
+    name = append(name,test$`Ticker Symbol`[i])
+    MC = append(MC, mc/count)
+    Year = append(Year,year(test$`Names Date`[i+1]))
+    X = 1 + test$Returns[i+1]
+    count = 1
+    mc = test$MC[i+1]
+  }
+}
+
+full = data.frame(Year,name,MC/1000,sep)
+quant = quantile(sep, probs = seq(0,1,0.01))
+effect = sep[which(sep>(-0.9385828))]
+effect = effect[which(effect < 8.1856168)]
+write.csv(full, file = "data summary.csv")
+
+hist(effect,breaks = 60)
+summary(effect)
+summary(MC /1000)
+
+Mstd = sd(effect)
+Mm = mean(effect)
+Kurt = kurtosis(effect)
+Skew = skewness(effect)
+
+stat = data.frame(Mm, Mstd, Skew, Kurt)
+names(stat) = c("Mean", "Standard Deviation", "Kurtosis", "Skewness")
+print(stat)
+
+    </pre>
+
+    <h2> References </h2>
+
+    <ul>
+      <li> <a https://wrds-web.wharton.upenn.edu/wrds/ > Wharton Research Data Services </a>, retrieved on Jan 16, 2019. </li>
+    </ul>
+
+    <p class="notice">TAs, please do not judge me too harshly.</p>
+
+  </body>
+</html>

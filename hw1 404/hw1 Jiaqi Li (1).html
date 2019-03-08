@@ -1,0 +1,263 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+<style>
+/* we start with iaw.css */
+
+
+h1 { font-size:17pt; text-align:center; color:black; }
+h2 { font-size:14pt; text-align:left; color:black; }
+h3 { font-size:11pt; text-align:left; color:black; }
+
+a { text-decoration:none; color:#3284bf; }
+a:hover { text-decoration:underline; }
+/* { background-color:#3284bf; color:white; } */
+
+hr.fat { background-color:black; height:4px; }
+
+hr { background-color:black; height:1px; }
+
+li { margin-top: 1em; }
+
+p.notice { background-color:white; font-size:10pt; border:solid black 5px; }
+
+caption { color:brown; text-decoration:underline; font-size:9pt; }
+td { padding-left:1em; padding-right:1em; }
+th { text-decoration:underline }
+table { margin-left:2em; }
+
+p.boxright { width:355px; margin-right:0px; background-color:white; font-size:10pt; float:right; padding:20px; font-size:large; vertical-align:top; }
+
+dt.big { line-height:3; font-size:large; font-weight:bolder; font-family:sans-serif;margin-top:12pt }
+dt.hili { font-size:large; font-family:Cursive; display:inline; text-decoration:underline; padding-top:1em; }
+dt.smallbold { font-size:small; font-family:Cursive; display:inline; font-weight:bold; }
+dd { margin-bottom:1ex }
+
+td.hili { font-size:x-large; font-family:cursive; margin:20px; vertical-align:top }
+
+div.smallnobox { width:400pt; font-size:smaller; margin:10px; }
+div.smallbox { width:400pt; font-size:smaller; margin:10px; border:solid black 1px; }
+
+.boxquote {float: left; text-align: center; border: solid black 1px;font-family: Times, sans-serif; font-size: 12pt; margin: 10px;}
+
+td.googler { vertical-align:bottom; color:green; font-size:x-large}
+
+.small { font-size:smaller; }
+.right { text-align:right; }
+
+body { font-family: 'Oxygen', Verdana, serif; margin:2em; background-color: #F0F0F0; }
+
+div.explain { font-size:smaller; margin-left:40px; margin-right:40px; margin-bottom:10px; }
+
+
+summary::-webkit-details-marker {
+    color: #00ACF3;
+    font-size: 125%;
+    margin-right: 2px;
+}
+
+summary:focus {	outline-style: none; }
+article { margin-left:1em; }
+article > details > summary { font-size: 28px; margin-top: 32px; }
+article > details > summary.link { font-size: 28px; margin-top: 32px; text-decoration:underine; }
+details > p { margin-left: 36px; background-color:#f0f0f0; }
+details > div { margin-left: 36px; background-color:#f0f0f0; }
+
+details details { margin-left: 48px; }
+details details summary { font-size: 16px; }
+
+</style>
+</head>
+
+
+  <body>
+
+    <h1> Homework 1, by Jiaqi Li, Jan 20, 2018 </h1>
+
+    <h2> Explanation and Summary </h2>
+In this assigment, daily data is imported from the FRED and monthly data is imported from the WRDS. Annual data and 5 years data are compounded from monthly data. For the risk free rate, annual rate is compounded from monthly 1 year bond rate and 5 year rate is compounded from monthly 5 years bond rate. Please note that daily risk free rate contains <b>381</b> missing values, which are replaced by the data from their previous date. All return rates are annualized.
+</p>
+
+    <h2> Tables and Figures </h2>
+
+    <p> Here goes your table:
+      <br> <br />
+      <table style="font-size:80%">
+        <caption> Annualized Return Table </caption>
+        <thead> <tr> <th>Period</th> <th>Arithmetic<br />Return</th> <th> Geometric<br />Return</th> </tr> </thead>
+        <tbody>
+          <tr> <td>Daily</td> <td><b>0.1133412</td> <td> <b>0.10336900 </td> </tr>
+          <tr> <td>Monthly</td> <td> <b>0.1117027 </td> <td> <b>0.10439072 </td> </tr>
+          <tr> <td>Annually</td> <td> <b>0.1201029 </td> <td> <b>0.10439072 </td> </tr>
+          <tr> <td>5 Years</td> <td> <b>0.1357899 </td> <td> <b>0.09710425 </td> </tr>
+        </tbody>
+      </table>
+      <br> <br />
+            <table style="font-size:80%">
+        <caption> Annualized Excess Return Table </caption>
+        <thead> <tr> <th>Period</th> <th>Arithmetic<br /> Excess Return</th> <th> Geometric<br />Excess Return</th> </tr> </thead>
+        <tbody>
+          <tr> <td>Daily</td> <td><b>0.05700922</td> <td> <b>0.04330148 </td> </tr>
+          <tr> <td>Monthly</td> <td> <b>0.06219610 </td> <td> <b>0.05123247 </td> </tr>
+          <tr> <td>Annually</td> <td> <b>0.05737086 </td> <td> <b>0.04039450 </td> </tr>
+          <tr> <td>5 Years</td> <td> <b>0.05394802 </td> <td> <b>0.02912853 </td> </tr>
+        </tbody>
+      </table>
+
+    <h2> Computer Code </h2>
+
+    <pre>
+#data-------------------------------------
+mrf = read.csv("my5y treasury monthly.csv")
+mon = read.csv("hw1 monthly.csv")
+day = read.csv("hw1 daily.csv")
+rf = read.csv("FederalFunds.csv")
+date.rf = as.Date(as.character(rf$date), format = "%Y%m%d")
+day.rf = xts(rf$FF_O, order.by = date.rf)
+day.rf = na.locf(day.rf)
+day.rf[1] = day.rf[2]
+day.rf = day.rf/100/252
+day.rf = cbind(rf$date,as.vector(day.rf))
+colnames(day.rf) = colnames(rf)
+day.rf = merge(day.rf,day,by.x = "date", by.y = "caldt")
+
+#function---------------------------------
+M2Y = function(data, period)
+{
+  spot = vector()
+  n = length(data)
+  x = 12*period
+  cur = 1
+  for (i in 1:n)
+  {
+    if ( i%%x == 1){
+      spot = append(spot, cur-1)
+      cur = 1
+      print(paste("get",(i-1)/x,"period"))
+    }
+    cur = cur*(1+data[i])
+  }
+  spot = append(spot, cur-1)
+  out = spot[-1]
+  return(out)
+}
+
+#method-------------------------------------
+ry = M2Y(mon$vwretd,1)
+r5y = M2Y(mon$vwretd,5)
+
+nd = length(day$vwretd)
+rd.mean = mean(day$vwretd)*252
+rd.geom = prod(1+day$vwretd)^(252/nd)-1
+
+nm = length(mon$vwretd)
+rm.mean = mean(mon$vwretd)*12
+rm.geom = prod(1+mon$vwretd)^(12/nm)-1
+
+ny = length(ry)
+ry.mean = mean(ry)
+ry.geom = prod(1+ry)^(1/ny)-1
+
+n5y = length(r5y)
+r5y.mean = mean(r5y)/5
+r5y.geom = prod(1+r5y)^(1/n5y/5)-1
+
+arith = c(rd.mean,rm.mean,ry.mean,r5y.mean)
+geom = c(rd.geom,rm.geom,ry.geom,r5y.geom)
+
+rfy = M2Y(mrf$b1ret,1)
+rf5y = M2Y(mrf$b5ret,5)
+
+ERd.mean = mean(day.rf$vwretd-day.rf$FF_O)*252
+ERm.mean = mean(mon$vwretd-mrf$t30ret)*12
+ERy.mean = mean(ry-rfy)
+ER5y.mean = mean(r5y-rf5y)/5
+
+nd.rf = length(day.rf$FF_O)
+
+ERd.geom = prod(1+(day.rf$vwretd-day.rf$FF_O))^(252/nd.rf)-1
+ERm.geom = prod(1+(mon$vwretd-mrf$t30ret))^(12/nm)-1
+ERy.geom = prod(1+(ry-rfy))^(1/ny)-1
+ER5y.geom = prod(1+(r5y-rf5y))^(1/n5y/5)-1
+
+arith.ER = c(ERd.mean,ERm.mean,ERy.mean,ER5y.mean)
+geom.ER = c(ERd.geom,ERm.geom,ERy.geom,ER5y.geom)
+ 
+    </pre>
+
+    <h2> References </h2>
+
+    <ul>
+      <li> <a https://wrds-web.wharton.upenn.edu/wrds/ > Wharton Research Data Services </a>, retrieved on Jan 16, 2019. </li>
+    </ul>
+    <ul>
+      <li> <a https://fred.stlouisfed.org/search?st=FederalFund > Effective Federal Funds Rate </a>, FRED, retrieved on Jan 19, 2019. </li>
+    </ul>
+
+    <p class="notice">TAs, please do not judge me too harshly.</p>
+
+  </body>
+</html>

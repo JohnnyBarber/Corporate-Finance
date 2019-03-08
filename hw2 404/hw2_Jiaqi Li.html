@@ -1,0 +1,204 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>Title</title>
+<style>
+/* we start with iaw.css */
+
+
+h1 { font-size:17pt; text-align:center; color:black; }
+h2 { font-size:14pt; text-align:left; color:black; }
+h3 { font-size:11pt; text-align:left; color:black; }
+
+a { text-decoration:none; color:#3284bf; }
+a:hover { text-decoration:underline; }
+/* { background-color:#3284bf; color:white; } */
+
+hr.fat { background-color:black; height:4px; }
+
+hr { background-color:black; height:1px; }
+
+li { margin-top: 1em; }
+
+p.notice { background-color:white; font-size:10pt; border:solid black 5px; }
+
+caption { color:brown; text-decoration:underline; font-size:9pt; }
+td { padding-left:1em; padding-right:1em; }
+th { text-decoration:underline }
+table { margin-left:2em; }
+
+p.boxright { width:355px; margin-right:0px; background-color:white; font-size:10pt; float:right; padding:20px; font-size:large; vertical-align:top; }
+
+dt.big { line-height:3; font-size:large; font-weight:bolder; font-family:sans-serif;margin-top:12pt }
+dt.hili { font-size:large; font-family:Cursive; display:inline; text-decoration:underline; padding-top:1em; }
+dt.smallbold { font-size:small; font-family:Cursive; display:inline; font-weight:bold; }
+dd { margin-bottom:1ex }
+
+td.hili { font-size:x-large; font-family:cursive; margin:20px; vertical-align:top }
+
+div.smallnobox { width:400pt; font-size:smaller; margin:10px; }
+div.smallbox { width:400pt; font-size:smaller; margin:10px; border:solid black 1px; }
+
+.boxquote {float: left; text-align: center; border: solid black 1px;font-family: Times, sans-serif; font-size: 12pt; margin: 10px;}
+
+td.googler { vertical-align:bottom; color:green; font-size:x-large}
+
+.small { font-size:smaller; }
+.right { text-align:right; }
+
+body { font-family: 'Oxygen', Verdana, serif; margin:2em; background-color: #F0F0F0; }
+
+div.explain { font-size:smaller; margin-left:40px; margin-right:40px; margin-bottom:10px; }
+
+
+summary::-webkit-details-marker {
+    color: #00ACF3;
+    font-size: 125%;
+    margin-right: 2px;
+}
+
+summary:focus {	outline-style: none; }
+article { margin-left:1em; }
+article > details > summary { font-size: 28px; margin-top: 32px; }
+article > details > summary.link { font-size: 28px; margin-top: 32px; text-decoration:underine; }
+details > p { margin-left: 36px; background-color:#f0f0f0; }
+details > div { margin-left: 36px; background-color:#f0f0f0; }
+
+details details { margin-left: 48px; }
+details details summary { font-size: 16px; }
+
+</style>
+</head>
+
+
+  <body>
+
+    <h1> Homework 2, by Jiaqi Li, Jan 26, 2019 </h1>
+
+    <h2> Explanation and Summary </h2>
+Data: <br>
+In this assigment, I used data only from S&P 500 companies. Excess returns are computed by subtracting return of  S&P 500 composite index from returns of stocks without dividend. Data file contains all daily stock returns and corresponding S&P 500 index returns from 2011 to 2018. There is no missing value in S&P 500 index return but about 2800 missing values in stock returns, which are all replaced by 0. All ex-dividend dates of all companies are also included in the data file. <br>
+Method: <br>
+All ex-dividend payment dates are lined up vertically in a matrix (a 11574*41 matrix). Since some ex-dividend dates does not have data from its previous or next 20 days, those ex-dividend dates are excluded from the whole calculation process. Then, compute the mean of each column, which is the mean return of each stock on each day through day -20 to day 20. Plot the mean returns shows us that: <br>
+On ex-dividend date, the excess return dropped intensively and then goes back to normal. This phenomenon indicates that the ex-dividend date is an special event that can cause a drop of a stock price.
+</p>
+
+    <h2> Tables and Figures and Computer Code </h2>
+
+<div class="chunk" id="unnamed-chunk-1"><div class="rcode"><div class="source"><pre class="knitr r"><span class="hl kwd">options</span><span class="hl std">(</span><span class="hl kwc">warn</span><span class="hl std">=</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl kwd">library</span><span class="hl std">(readxl)</span>
+<span class="hl std">snp</span> <span class="hl kwb">=</span> <span class="hl kwd">read_excel</span><span class="hl std">(</span><span class="hl str">&quot;sp500_stock_data.xlsx&quot;</span><span class="hl std">)</span>
+
+<span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Returns without Dividends`[</span><span class="hl kwd">is.na</span><span class="hl std">(snp</span><span class="hl opt">$</span><span class="hl std">`Returns without Dividends`)]</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+
+<span class="hl std">p.all</span> <span class="hl kwb">=</span> <span class="hl kwd">which</span><span class="hl std">(</span><span class="hl opt">!</span><span class="hl kwd">is.na</span><span class="hl std">(snp</span><span class="hl opt">$</span><span class="hl std">`Payment Date`))</span>
+<span class="hl std">event</span> <span class="hl kwb">=</span> <span class="hl std">snp[p.all,]</span>
+<span class="hl std">n</span> <span class="hl kwb">=</span> <span class="hl kwd">length</span><span class="hl std">(p.all)</span>
+<span class="hl std">pos</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">()</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">2</span><span class="hl opt">:</span><span class="hl std">n)</span>
+<span class="hl std">{</span>
+  <span class="hl kwa">if</span> <span class="hl std">(snp</span><span class="hl opt">$</span><span class="hl std">`Ticker Symbol`[p.all[i]]</span> <span class="hl opt">!=</span> <span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Ticker Symbol`[p.all[i]</span><span class="hl opt">-</span><span class="hl num">21</span><span class="hl std">]</span>
+      <span class="hl opt">||</span> <span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Ticker Symbol`[p.all[i]]</span> <span class="hl opt">!=</span> <span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Ticker Symbol`[p.all[i]</span><span class="hl opt">+</span><span class="hl num">20</span><span class="hl std">])</span>
+  <span class="hl std">{</span>
+    <span class="hl std">pos</span> <span class="hl kwb">=</span> <span class="hl kwd">append</span><span class="hl std">(pos,i)</span>
+  <span class="hl std">}</span>
+<span class="hl std">}</span>
+
+<span class="hl std">p</span> <span class="hl kwb">=</span> <span class="hl std">p.all[</span><span class="hl opt">-</span><span class="hl std">pos]</span>
+<span class="hl std">p</span> <span class="hl kwb">=</span> <span class="hl std">p[</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">]</span>
+<span class="hl std">RETX</span> <span class="hl kwb">=</span> <span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Returns without Dividends`</span>
+<span class="hl std">sprtrn</span> <span class="hl kwb">=</span> <span class="hl std">snp</span><span class="hl opt">$</span><span class="hl std">`Return on the S&amp;P 500 Index`</span>
+
+<span class="hl std">row_EXR</span> <span class="hl kwb">=</span> <span class="hl kwd">matrix</span><span class="hl std">(</span><span class="hl num">0</span><span class="hl std">,</span><span class="hl kwc">ncol</span> <span class="hl std">=</span> <span class="hl num">41</span><span class="hl std">)</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl kwd">length</span><span class="hl std">(p))</span>
+<span class="hl std">{</span>
+  <span class="hl std">row_EXR</span> <span class="hl kwb">=</span> <span class="hl kwd">rbind</span><span class="hl std">(row_EXR,RETX[(p[i]</span><span class="hl opt">-</span><span class="hl num">20</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(p[i]</span><span class="hl opt">+</span><span class="hl num">20</span><span class="hl std">)]</span>
+                  <span class="hl opt">-</span><span class="hl std">sprtrn[(p[i]</span><span class="hl opt">-</span><span class="hl num">20</span><span class="hl std">)</span><span class="hl opt">:</span><span class="hl std">(p[i]</span><span class="hl opt">+</span><span class="hl num">20</span><span class="hl std">)])</span>
+<span class="hl std">}</span>
+<span class="hl std">row_EXR</span> <span class="hl kwb">=</span> <span class="hl std">row_EXR[</span><span class="hl opt">-</span><span class="hl num">1</span><span class="hl std">,]</span>
+<span class="hl std">row_EXR[</span><span class="hl kwd">is.na</span><span class="hl std">(row_EXR)]</span> <span class="hl kwb">=</span> <span class="hl num">0</span>
+
+<span class="hl std">mu</span> <span class="hl kwb">=</span> <span class="hl kwd">vector</span><span class="hl std">()</span>
+<span class="hl kwa">for</span> <span class="hl std">(i</span> <span class="hl kwa">in</span> <span class="hl num">1</span><span class="hl opt">:</span><span class="hl num">41</span><span class="hl std">) { mu</span> <span class="hl kwb">=</span> <span class="hl kwd">append</span><span class="hl std">(mu,</span><span class="hl kwd">mean</span><span class="hl std">(row_EXR[,i]))}</span>
+
+<span class="hl std">X</span> <span class="hl kwb">=</span> <span class="hl kwd">seq</span><span class="hl std">(</span><span class="hl opt">-</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">20</span><span class="hl std">,</span><span class="hl num">1</span><span class="hl std">)</span>
+<span class="hl kwd">plot</span><span class="hl std">(X, mu,</span> <span class="hl kwc">type</span> <span class="hl std">=</span> <span class="hl str">&quot;o&quot;</span><span class="hl std">,</span> <span class="hl kwc">main</span> <span class="hl std">=</span> <span class="hl str">&quot;Event Study&quot;</span><span class="hl std">,</span>
+     <span class="hl kwc">ylab</span> <span class="hl std">=</span> <span class="hl str">&quot;Excess Return&quot;</span><span class="hl std">,</span> <span class="hl kwc">xlab</span> <span class="hl std">=</span> <span class="hl str">&quot;Day&quot;</span><span class="hl std">)</span>
+</pre></div>
+</div><div class="rimage default"><img src="figure/unnamed-chunk-1-1.png" title="plot of chunk unnamed-chunk-1" alt="plot of chunk unnamed-chunk-1" class="plot" /></div></div>
+    
+    <h2> References </h2>
+
+    <ul>
+      <li> <a https://wrds-web.wharton.upenn.edu/wrds/ > Wharton Research Data Services </a>, retrieved on Jan 25, 2019. </li>
+    </ul>
+    <ul>
+      <li> <a https://en.wikipedia.org/wiki/List_of_S%26P_500_companies > List of S&P 500 companies </a>, Wikipedia, retrieved on Jan 25, 2019. </li>
+    </ul>
+
+    <p class="notice">TAs, please do not judge me too harshly.</p>
+
+  </body>
+</html>

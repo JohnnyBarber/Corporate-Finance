@@ -1,0 +1,128 @@
+<html>
+
+<head>
+<style type="text/css">
+.knitr .inline {
+  background-color: #f7f7f7;
+  border:solid 1px #B0B0B0;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;
+}
+.warning {
+	font-weight: bold;
+}
+.message {
+	font-style: italic;
+}
+.source, .output, .warning, .error, .message {
+	padding: 0 1em;
+  border:solid 1px #F7F7F7;
+}
+.source {
+  background-color: #f5f5f5;
+}
+.rimage .left {
+  text-align: left;
+}
+.rimage .right {
+  text-align: right;
+}
+.rimage .center {
+  text-align: center;
+}
+.hl.num {
+  color: #AF0F91;
+}
+.hl.str {
+  color: #317ECC;
+}
+.hl.com {
+  color: #AD95AF;
+  font-style: italic;
+}
+.hl.opt {
+  color: #000000;
+}
+.hl.std {
+  color: #585858;
+}
+.hl.kwa {
+  color: #295F94;
+  font-weight: bold;
+}
+.hl.kwb {
+  color: #B05A65;
+}
+.hl.kwc {
+  color: #55aa55;
+}
+.hl.kwd {
+  color: #BC5A65;
+  font-weight: bold;
+}
+</style>
+<title>hw2-evtstudy-Shuyu_Dong-answer</title>
+</head>
+
+<meta name="KEYWORDS" content="..." />
+<meta name="Author" content="Shuyu Dong"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="hw.css" />
+
+<body>
+<h1> Homework2-Evtstudy, by Shuyu Dong </h1>
+ <h2> Executive Summary </h2>
+ 
+<p>By calculating the mean of the access return before and after the dividend payment, we can conclude that there is a jump in the stock return on the ex-dividend date, but there is basically no change in the stock return before and after day 0. There is no trend before and after the ex-dividend dates and the excess stock returns are quite close to 0 except for ex-dividend dates. </p>
+
+<h2> Full Body Text </h2>
+<p>Firstly we get all the stock return, S&P500 return and ex-divident date from CRSP (2010-01-01/2018-06-30). Using stock returns subtracted by S&P500 returns, we get the access return. Then we collect the access return from day -20 to day 20 according to the ex-dividend date. By taking average of excess returns each of the 41 days, we get how stock behaves when it pays a dividend.</p>
+ <h2> Tables and Figures </h2>
+<img alt="Rplot" width="542" height="462" src="data:image/png;base64,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">
+ <h2> Computer Code </h2>
+ <pre>
+ library(xts)
+library(lubridate)
+library(data.table)
+
+library(ggplot2)
+
+sp_500=read.csv("sp500_dividend.csv",header = T)
+sp_500$excess_return=as.numeric(as.vector(sp_500$RETX))-as.numeric(as.vector(sp_500$sprtrn))
+sp_500=sp_500[-is.na(sp_500$excess_return),]
+
+
+dayzero=which(!is.na(sp_500$PAYDT))
+n=length(dayzero)
+
+result=data.frame("date"=1:41)
+
+for(i in 1:n){
+  if(dayzero[i]>20){ 
+    exday=dayzero[i]
+    day_b=exday-20
+    day_a=exday+20
+    result=cbind(result,sp_500[day_b:day_a,"excess_return"])
+  }
+}
+result=result[,-1]
+
+
+mean=apply(result, mean, MARGIN = 1,na.rm=T)
+
+plot(mean,x=c(-20:20),xlab = "Days",type="l",col="purple",main="stock return")
+points(mean,x=c(-20:20),col="black",pch=20)
+</pre>
+
+<h2> References </h2>
+ <ul>
+      <li> <a href="https://wrds-web.wharton.upenn.edu/wrds/ds/crsp/stock_a/dsf.cfm?navId=128">S&P500 return, stock return and dividend payment date</a>, WRDS, retrieved on Jan 20, 2019. </li>
+    </ul>
+</body>
+</html>
